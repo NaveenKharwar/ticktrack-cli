@@ -1,23 +1,18 @@
+# 🕓 TickTrack CLI
 
-# TickTrack CLI
+> A simple CLI tool to log support tickets and daily tasks straight into Google Sheets.
 
-> A simple CLI tool to track your support tickets, tasks, and sessions — directly into Google Sheets.
-
-TickTrack helps support engineers and developers log their daily tickets and tasks with speed and precision, without ever leaving the terminal.
-
----
+TickTrack helps support engineers and developers record their work—ticket by ticket—with speed, structure, and simplicity, all from your terminal.
 
 ## ✨ Features
 
 - 🔗 Log tickets by URL, with tags and comments
-- 🛠️ Record additional daily tasks (like writing docs, attending calls)
-- 📊 Automatically saves data to a Google Sheet
-- 📁 Creates a new sheet for each day
-- ➕ Adds a `BREAK` row when you end the session
-- 🧮 Shows total entries (excluding breaks)
-- 🧠 All via a terminal-first, keyboard-friendly CLI
-
----
+- 🛠️ Add optional daily tasks (like documentation, meetings)
+- 📊 Automatically writes data to a connected Google Sheet
+- 🗓️ Creates a new sheet each day automatically
+- ➕ Adds a `BREAK` row at end of session
+- 🧮 Displays total valid entries for the day
+- ⌨️ Terminal-based workflow — no mouse needed!
 
 ## 📸 Screenshot
 
@@ -30,14 +25,12 @@ TickTrack helps support engineers and developers log their daily tickets and tas
 Initializing your workspace...
 ````
 
----
-
 ## 🚀 Getting Started
 
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/naveenkharwar/ticktrack-cli.git
+git clone https://github.com/your-username/ticktrack-cli.git
 cd ticktrack-cli
 ```
 
@@ -49,15 +42,14 @@ npm install
 
 ### 3. Setup Google Sheets API
 
-* Go to [Google Cloud Console](https://console.cloud.google.com/)
-* Create a new project
-* Enable **Google Sheets API**
-* Create a **Service Account**, then:
+1. Visit [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project
+3. Enable the **Google Sheets API**
+4. Create a **Service Account**
+5. Download the credentials as a `.json` file and rename it to `credentials.json`
+6. Share your Google Sheet with the **service account email** (read/write access)
 
-  * Download the `JSON` file and rename it to `credentials.json`
-  * Share your Google Sheet with the service account email
-
-Place `credentials.json` in the root of the project.
+Place the `credentials.json` file in the root of the project.
 
 ### 4. Create a `.env` file
 
@@ -65,10 +57,8 @@ Place `credentials.json` in the root of the project.
 GOOGLE_SHEET_ID=your_google_sheet_id_here
 ```
 
-> 🧠 You can find the Sheet ID in the URL:
+> 🔍 You can find your Sheet ID in the URL:
 > `https://docs.google.com/spreadsheets/d/THIS_IS_YOUR_ID/edit#gid=0`
-
----
 
 ## 🛠️ Usage
 
@@ -77,16 +67,14 @@ npm run start
 ```
 
 * Answer the prompts
-* Add ticket URLs, tags, and comments
-* Record optional "Other Tasks"
-* After each entry, you'll be asked if you want to log another ticket
-* On exit, a `BREAK` row will be added automatically
-
----
+* Enter ticket URL, select tags, and add comments
+* Optionally add other tasks (opens your default editor)
+* After each entry, you'll be asked if you'd like to log another
+* Exiting the session adds a `BREAK` row
 
 ## 🎯 Supported Tags
 
-When prompted, you can select any of:
+You can choose from:
 
 * `new`
 * `follow-up`
@@ -95,56 +83,72 @@ When prompted, you can select any of:
 * `long`
 * `quick`
 
-Feel free to customize them in `prompts.ts`.
+These can be customized in `prompts.ts`.
 
----
+## ⌨️ Keyboard Shortcuts
 
-## ⌨️ Keyboard Tips
-
-* **Space** to select tags
-* **Enter** to confirm
-* **ESC** to cancel a prompt
-* Type `exit` as the ticket URL to quit
-* Press `Ctrl + C` anytime to exit
-
----
+* `Space` to select a tag
+* `Enter` to continue
+* `Esc` to cancel a prompt
+* Type `exit` in ticket prompt to quit
+* `Ctrl + C` to exit immediately
 
 ## 📁 Project Structure
 
 ```
-src/
-├── index.ts         # Entry point
-├── prompts.ts       # Inquirer prompts
-├── sheets.ts        # Google Sheets integration
-└── types.ts         # Type definitions
+ticktrack-cli/
+├── src/
+│   ├── index.ts       # Main CLI logic
+│   ├── prompts.ts     # Inquirer questions
+│   ├── sheets.ts      # Google Sheets API logic
+│   └── types.ts       # Shared types
+├── credentials.json   # Your Google credentials (not tracked)
+├── .env               # Your environment variables
+└── README.md
 ```
 
----
+## 🧼 .gitignore Tip
 
-## 🔒 .gitignore Tip
-
-Make sure your `.gitignore` includes:
+Add the following to `.gitignore`:
 
 ```
-credentials.json
 .env
+credentials.json
 ```
 
----
+## 📦 Local CLI Setup (Optional)
+
+To run `ticktrack` globally from your terminal:
+
+1. Add this at the top of `src/index.ts`:
+
+   ```ts
+   #!/usr/bin/env node
+   ```
+
+2. Make it executable:
+
+   ```bash
+   chmod +x src/index.ts
+   npm link
+   ```
+
+Now you can use:
+
+```bash
+ticktrack
+```
 
 ## 📄 License
 
 MIT — © 2025 Naveen Kharwar
 
----
+## 🙌 Built With
 
-## 🙌 Credits
-
-Thanks to:
-
-* [`chalk`](https://www.npmjs.com/package/chalk)
-* [`boxen`](https://www.npmjs.com/package/boxen)
-* [`inquirer`](https://www.npmjs.com/package/inquirer)
-* [`googleapis`](https://www.npmjs.com/package/googleapis)
-
----
+* [`chalk`](https://www.npmjs.com/package/chalk) – CLI colors
+* [`boxen`](https://www.npmjs.com/package/boxen) – Welcome banners
+* [`ora`](https://www.npmjs.com/package/ora) – Terminal loaders
+* [`inquirer`](https://www.npmjs.com/package/inquirer) – Interactive prompts
+* [`googleapis`](https://www.npmjs.com/package/googleapis) – Sheets API
+* [`dotenv`](https://www.npmjs.com/package/dotenv) – Environment variables
+* [`dayjs`](https://www.npmjs.com/package/dayjs) – Time formatting
