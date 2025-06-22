@@ -1,0 +1,40 @@
+{
+  "name": "ticktrack-cli",
+  "version": "1.0.0",
+  "description": "A minimal terminal-based ticket logger that saves entries to Google Sheets.",
+  "main": "src/index.ts",
+  "type": "commonjs",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node src/index.ts",
+    "build": "tsc"
+  },
+  "bin": {
+    "ticktrack": "./src/index.ts"
+  },
+  "author": "Naveen Kharwar",
+  "license": "MIT",
+  "keywords": [
+    "cli",
+    "ticket",
+    "logger",
+    "support",
+    "typescript",
+    "google-sheets"
+  ],
+  "dependencies": {
+    "boxen": "^5.1.2",
+    "chalk": "^4.1.2",
+    "dayjs": "^1.11.13",
+    "dotenv": "^16.5.0",
+    "googleapis": "^150.0.1",
+    "inquirer": "^12.6.3",
+    "ora": "^5.4.1"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.8",
+    "@types/node": "^20.4.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
